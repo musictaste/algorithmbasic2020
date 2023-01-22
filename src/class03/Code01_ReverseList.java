@@ -3,6 +3,7 @@ package class03;
 import java.util.ArrayList;
 import java.util.List;
 
+// 链表反转
 public class Code01_ReverseList {
 
 	public static class Node {
@@ -27,6 +28,7 @@ public class Code01_ReverseList {
 	//  head
 	//   a    ->   b    ->  c  ->  null
 	//   c    ->   b    ->  a  ->  null
+	// 单向链表的反转
 	public static Node reverseLinkedList(Node head) {
 		Node pre = null;
 		Node next = null;
@@ -39,6 +41,7 @@ public class Code01_ReverseList {
 		return pre;
 	}
 
+	// 双向链表的反转
 	public static DoubleNode reverseDoubleList(DoubleNode head) {
 		DoubleNode pre = null;
 		DoubleNode next = null;

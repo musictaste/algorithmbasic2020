@@ -1,5 +1,6 @@
 package class03;
 
+// 单向链表中删除全部指定值
 public class Code02_DeleteGivenValue {
 
 	public static class Node {

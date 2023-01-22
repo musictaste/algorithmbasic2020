@@ -2,6 +2,7 @@ package class01;
 
 import java.util.Arrays;
 
+// 一个有序数组中是否存在某个数，使用二分法
 public class Code04_BSExist {
 
 	public static boolean exist(int[] sortedArr, int num) {

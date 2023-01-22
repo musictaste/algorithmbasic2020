@@ -1,5 +1,6 @@
 package class01;
 
+// 一个无序数组中求局部最小值
 public class Code06_BSAwesome {
 
 	// 课上的代码
