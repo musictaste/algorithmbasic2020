@@ -2,6 +2,7 @@ package class09;
 
 import java.util.HashMap;
 
+// 含有随机指针的链表的复制
 // 测试链接 : https://leetcode.com/problems/copy-list-with-random-pointer/
 public class Code04_CopyListWithRandom {
 
@@ -17,6 +18,8 @@ public class Code04_CopyListWithRandom {
 		}
 	}
 
+	// 使用容器
+	// 时间复杂度：O(N)
 	public static Node copyRandomList1(Node head) {
 		// key 老节点
 		// value 新节点
@@ -38,6 +41,8 @@ public class Code04_CopyListWithRandom {
 		return map.get(head);
 	}
 
+	// 不使用容器，在老节点后面复制对应的新节点，生成一个新的链表
+	// 时间复杂度：O(N),空间复杂度O(1),原因是要求返回一个新的链表
 	public static Node copyRandomList2(Node head) {
 		if (head == null) {
 			return null;
