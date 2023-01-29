@@ -2,6 +2,7 @@ package class10;
 
 import java.util.Stack;
 
+// 非递归的方式实现二叉树的先序、中序、后序遍历
 public class Code03_UnRecursiveTraversalBT {
 
 	public static class Node {
@@ -14,6 +15,7 @@ public class Code03_UnRecursiveTraversalBT {
 		}
 	}
 
+	// 非递归-先序
 	public static void pre(Node head) {
 		System.out.print("pre-order: ");
 		if (head != null) {
@@ -22,7 +24,7 @@ public class Code03_UnRecursiveTraversalBT {
 			while (!stack.isEmpty()) {
 				head = stack.pop();
 				System.out.print(head.value + " ");
-				if (head.right != null) {
+				if (head.right != null) { // 先右孩子节点，后左孩子节点
 					stack.push(head.right);
 				}
 				if (head.left != null) {
@@ -33,12 +35,13 @@ public class Code03_UnRecursiveTraversalBT {
 		System.out.println();
 	}
 
+	// 非递归-中序遍历
 	public static void in(Node cur) {
 		System.out.print("in-order: ");
 		if (cur != null) {
 			Stack<Node> stack = new Stack<Node>();
-			while (!stack.isEmpty() || cur != null) {
-				if (cur != null) {
+			while (!stack.isEmpty() || cur != null) { // 栈为空，cur为空
+				if (cur != null) { // 先将整个左边界压入栈
 					stack.push(cur);
 					cur = cur.left;
 				} else {
@@ -51,6 +54,7 @@ public class Code03_UnRecursiveTraversalBT {
 		System.out.println();
 	}
 
+	// 非递归-后序遍历，利用两个栈
 	public static void pos1(Node head) {
 		System.out.print("pos-order: ");
 		if (head != null) {
@@ -60,7 +64,7 @@ public class Code03_UnRecursiveTraversalBT {
 			while (!s1.isEmpty()) {
 				head = s1.pop(); // 头 右 左
 				s2.push(head);
-				if (head.left != null) {
+				if (head.left != null) { // 先左孩子节点，后右孩子节点
 					s1.push(head.left);
 				}
 				if (head.right != null) {
@@ -75,6 +79,7 @@ public class Code03_UnRecursiveTraversalBT {
 		System.out.println();
 	}
 
+	// 非递归-后序遍历，利用一个栈(不需要掌握)
 	public static void pos2(Node h) {
 		System.out.print("pos-order: ");
 		if (h != null) {
