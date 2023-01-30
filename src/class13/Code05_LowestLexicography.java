@@ -6,6 +6,7 @@ import java.util.TreeSet;
 
 public class Code05_LowestLexicography {
 
+	// 暴力解
 	public static String lowestString1(String[] strs) {
 		if (strs == null || strs.length == 0) {
 			return "";
@@ -47,6 +48,7 @@ public class Code05_LowestLexicography {
 		return ans;
 	}
 
+	// 贪心算法
 	public static class MyComparator implements Comparator<String> {
 		@Override
 		public int compare(String a, String b) {
