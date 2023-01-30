@@ -82,7 +82,7 @@ public class Code01_IsCBT {
         boolean isFull = leftInfo.isFull
                 &&
                 rightInfo.isFull
-                && leftInfo.height == rightInfo.height;
+                && leftInfo.height == rightInfo.height; // 左树满、右树满、左树高度=右树高度
 
         boolean isCBT = false;
         if (isFull) {
@@ -91,17 +91,17 @@ public class Code01_IsCBT {
             if (leftInfo.isCBT && rightInfo.isCBT) {
                 if (leftInfo.isCBT
                         && rightInfo.isFull
-                        && leftInfo.height == rightInfo.height + 1) {
+                        && leftInfo.height == rightInfo.height + 1) { // 左完全二叉树、右满，左高==右高+1
                     isCBT = true;
                 }
                 if (leftInfo.isFull
                         &&
                         rightInfo.isFull
-                        && leftInfo.height == rightInfo.height + 1) {
+                        && leftInfo.height == rightInfo.height + 1) { // 左满、右满、左高=右高+1
                     isCBT = true;
                 }
                 if (leftInfo.isFull
-                        && rightInfo.isCBT && leftInfo.height == rightInfo.height) {
+                        && rightInfo.isCBT && leftInfo.height == rightInfo.height) { // 左满 右完全、左高=右高
                     isCBT = true;
                 }
             }

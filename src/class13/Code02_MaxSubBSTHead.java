@@ -2,6 +2,7 @@ package class13;
 
 import java.util.ArrayList;
 
+// 找到最大的二叉搜索子树的头结点
 public class Code02_MaxSubBSTHead {
 
 	public static class Node {

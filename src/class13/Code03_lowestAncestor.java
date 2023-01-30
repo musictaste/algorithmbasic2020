@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+// 返回a和b的最低公共祖先
 public class Code03_lowestAncestor {
 
 	public static class Node {
@@ -49,14 +50,15 @@ public class Code03_lowestAncestor {
 		}
 	}
 
+	// 递归套路解法
 	public static Node lowestAncestor2(Node head, Node a, Node b) {
 		return process(head, a, b).ans;
 	}
 
 	public static class Info {
-		public boolean findA;
-		public boolean findB;
-		public Node ans;
+		public boolean findA; // 有没有发现a
+		public boolean findB; // 有没有发现b
+		public Node ans; // 有没有发现a、b的公共祖先
 
 		public Info(boolean fA, boolean fB, Node an) {
 			findA = fA;

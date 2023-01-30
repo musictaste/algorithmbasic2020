@@ -3,6 +3,7 @@ package class13;
 import java.util.ArrayList;
 import java.util.List;
 
+// 多叉树代表公司结构，每个人都有个快乐值，发请柬来参见聚会，直接上下级的不能一起邀请，返回最大的快乐值
 public class Code04_MaxHappy {
 
 	public static class Employee {
@@ -46,6 +47,8 @@ public class Code04_MaxHappy {
 		}
 	}
 
+
+	// 递归套路
 	public static int maxHappy2(Employee head) {
 		Info allInfo = process(head);
 		return Math.max(allInfo.no, allInfo.yes);
@@ -69,9 +72,8 @@ public class Code04_MaxHappy {
 		int yes = x.happy;
 		for (Employee next : x.nexts) {
 			Info nextInfo = process(next);
-			no += Math.max(nextInfo.no, nextInfo.yes);
-			yes += nextInfo.no;
-
+			no += Math.max(nextInfo.no, nextInfo.yes); // 当前节点不来，子节点可以来也可以不来
+			yes += nextInfo.no; // 当前节点来，直接子节点不能来
 		}
 		return new Info(no, yes);
 	}
