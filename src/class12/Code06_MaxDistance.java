@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+// 返回整棵二叉树的最大距离
 public class Code06_MaxDistance {
 
 	public static class Node {

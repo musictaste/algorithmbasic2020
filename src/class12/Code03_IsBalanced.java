@@ -1,5 +1,6 @@
 package class12;
 
+// 判断是否为平衡二叉树
 public class Code03_IsBalanced {
 
 	public static class Node {
@@ -31,10 +32,12 @@ public class Code03_IsBalanced {
 		return Math.max(leftHeight, rightHeight) + 1;
 	}
 
+	// 方案一
 	public static boolean isBalanced2(Node head) {
 		return process(head).isBalanced;
 	}
-	
+
+	// 信息：是否平衡+最大高度
 	public static class Info{
 		public boolean isBalanced;
 		public int height;
@@ -46,7 +49,7 @@ public class Code03_IsBalanced {
 	}
 	
 	public static Info process(Node x) {
-		if(x == null) {
+		if(x == null) { // 空树是平衡二叉树
 			return new Info(true, 0);
 		}
 		Info leftInfo = process(x.left);

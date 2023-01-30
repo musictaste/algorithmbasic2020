@@ -2,6 +2,7 @@ package class12;
 
 import java.util.ArrayList;
 
+// 找到最大的子树是搜索二叉树
 // 在线测试链接 : https://leetcode.com/problems/largest-bst-subtree
 public class Code05_MaxSubBSTSize {
 
@@ -25,8 +26,9 @@ public class Code05_MaxSubBSTSize {
 	}
 
 	public static class Info {
-		public int maxBSTSubtreeSize;
-		public int allSize;
+		// public boolean isBST; 是否为搜索二叉树，最大二叉搜索子树的节点数==当前节点为树的节点数
+		public int maxBSTSubtreeSize; // 最大二叉搜索子树的节点数
+		public int allSize; // 当前节点为树的节点数
 		public int max;
 		public int min;
 
@@ -44,7 +46,7 @@ public class Code05_MaxSubBSTSize {
 		}
 		Info leftInfo = process(x.left);
 		Info rightInfo = process(x.right);
-		int max = x.val;
+		int max = x.val; // 初始值
 		int min = x.val;
 		int allSize = 1;
 		if (leftInfo != null) {
@@ -66,9 +68,9 @@ public class Code05_MaxSubBSTSize {
 			p2 = rightInfo.maxBSTSubtreeSize;
 		}
 		int p3 = -1;
-		boolean leftBST = leftInfo == null ? true : (leftInfo.maxBSTSubtreeSize == leftInfo.allSize);
+		boolean leftBST = leftInfo == null ? true : (leftInfo.maxBSTSubtreeSize == leftInfo.allSize); // 左子树是否为搜索二叉树
 		boolean rightBST = rightInfo == null ? true : (rightInfo.maxBSTSubtreeSize == rightInfo.allSize);
-		if (leftBST && rightBST) {
+		if (leftBST && rightBST) { // 判断X做头的树是否为搜索二叉树
 			boolean leftMaxLessX = leftInfo == null ? true : (leftInfo.max < x.val);
 			boolean rightMinMoreX = rightInfo == null ? true : (x.val < rightInfo.min);
 			if (leftMaxLessX && rightMinMoreX) {

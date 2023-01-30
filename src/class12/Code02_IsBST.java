@@ -2,6 +2,7 @@ package class12;
 
 import java.util.ArrayList;
 
+// 判断是否搜索二叉树
 public class Code02_IsBST {
 
 	public static class Node {
@@ -54,7 +55,6 @@ public class Code02_IsBST {
 			max = ma;
 			min = mi;
 		}
-
 	}
 
 	public static Info process(Node x) {
@@ -63,7 +63,7 @@ public class Code02_IsBST {
 		}
 		Info leftInfo = process(x.left);
 		Info rightInfo = process(x.right);
-		int max = x.value;
+		int max = x.value; // 设置信息max
 		if (leftInfo != null) {
 			max = Math.max(max, leftInfo.max);
 		}
@@ -78,16 +78,16 @@ public class Code02_IsBST {
 			min = Math.min(min, rightInfo.min);
 		}
 		boolean isBST = true;
-		if (leftInfo != null && !leftInfo.isBST) {
+		if (leftInfo != null && !leftInfo.isBST) { // 左树不是搜索二叉树
 			isBST = false;
 		}
-		if (rightInfo != null && !rightInfo.isBST) {
+		if (rightInfo != null && !rightInfo.isBST) { // 右树不是搜索二叉树
 			isBST = false;
 		}
-		if (leftInfo != null && leftInfo.max >= x.value) {
+		if (leftInfo != null && leftInfo.max >= x.value) { // 左树的max > 头节点
 			isBST = false;
 		}
-		if (rightInfo != null && rightInfo.min <= x.value) {
+		if (rightInfo != null && rightInfo.min <= x.value) { // 右树的min < 头节点
 			isBST = false;
 		}
 		return new Info(isBST, max, min);
