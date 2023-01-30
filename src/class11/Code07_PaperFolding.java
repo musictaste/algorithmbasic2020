@@ -1,9 +1,10 @@
 package class11;
 
+// 二叉树折纸问题
 public class Code07_PaperFolding {
 
 	public static void printAllFolds(int N) {
-		process(1, N, true);
+		process(1, N, true); // 这棵树的头结点是凹的
 		System.out.println();
 	}
 
@@ -16,9 +17,9 @@ public class Code07_PaperFolding {
 		if (i > N) {
 			return;
 		}
-		process(i + 1, N, true);
+		process(i + 1, N, true); // 所有左子树的头结点是凹的
 		System.out.print(down ? "凹 " : "凸 ");
-		process(i + 1, N, false);
+		process(i + 1, N, false); // 所有右子树的头结点是凸的
 	}
 
 	public static void main(String[] args) {

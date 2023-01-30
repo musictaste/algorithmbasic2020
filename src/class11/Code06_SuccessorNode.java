@@ -1,5 +1,6 @@
 package class11;
 
+// 给定二叉树中的某个节点，返回该节点的后继节点
 public class Code06_SuccessorNode {
 
 	public static class Node {
@@ -17,7 +18,7 @@ public class Code06_SuccessorNode {
 		if (node == null) {
 			return node;
 		}
-		if (node.right != null) {
+		if (node.right != null) { // 有右树，找右树上的最左节点
 			return getLeftMost(node.right);
 		} else { // 无右子树
 			Node parent = node.parent;

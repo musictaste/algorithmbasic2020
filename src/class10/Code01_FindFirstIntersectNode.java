@@ -37,7 +37,7 @@ public class Code01_FindFirstIntersectNode {
 		Node slow = head.next; // n1 -> slow
 		Node fast = head.next.next; // n2 -> fast
 		while (slow != fast) {
-			if (fast.next == null || fast.next.next == null) {
+			if (fast.next == null || fast.next.next == null) { // 第一个判断条件的目的：为了防止第二个判断条件的fast.next为空
 				return null;
 			}
 			fast = fast.next.next;

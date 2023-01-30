@@ -2,6 +2,7 @@ package class09;
 
 import java.util.Stack;
 
+// 判断链表是否为回文结构
 public class Code02_IsPalindromeList {
 
 	public static class Node {

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+// 二叉树的序列化和反序列化
 public class Code02_SerializeAndReconstructTree {
     /*
      * 二叉树可以通过先序、后序或者按层遍历的方式序列化和反序列化，
@@ -31,6 +32,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 先序的序列化
 	public static Queue<String> preSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		pres(head, ans);
@@ -39,7 +41,7 @@ public class Code02_SerializeAndReconstructTree {
 
 	public static void pres(Node head, Queue<String> ans) {
 		if (head == null) {
-			ans.add(null);
+			ans.add(null); // 空用什么占位，可以是null，也可以是特殊的字符#
 		} else {
 			ans.add(String.valueOf(head.value));
 			pres(head.left, ans);
@@ -47,6 +49,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 中序的序列化--不可行，有歧义
 	public static Queue<String> inSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		ins(head, ans);
@@ -63,6 +66,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 后序的序列化
 	public static Queue<String> posSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		poss(head, ans);
@@ -79,6 +83,7 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	// 先序的反序列化
 	public static Node buildByPreQueue(Queue<String> prelist) {
 		if (prelist == null || prelist.size() == 0) {
 			return null;
@@ -97,6 +102,7 @@ public class Code02_SerializeAndReconstructTree {
 		return head;
 	}
 
+	// 后序的反序列化
 	public static Node buildByPosQueue(Queue<String> poslist) {
 		if (poslist == null || poslist.size() == 0) {
 			return null;
@@ -120,18 +126,19 @@ public class Code02_SerializeAndReconstructTree {
 		return head;
 	}
 
+	// 按层方式序列化
 	public static Queue<String> levelSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		if (head == null) {
 			ans.add(null);
 		} else {
 			ans.add(String.valueOf(head.value));
-			Queue<Node> queue = new LinkedList<Node>();
+			Queue<Node> queue = new LinkedList<Node>(); // 用于按层遍历的队列
 			queue.add(head);
 			while (!queue.isEmpty()) {
 				head = queue.poll(); // head 父   子
 				if (head.left != null) {
-					ans.add(String.valueOf(head.left.value));
+					ans.add(String.valueOf(head.left.value)); // 节点进入队列的时候进行序列化
 					queue.add(head.left);
 				} else {
 					ans.add(null);
@@ -147,6 +154,7 @@ public class Code02_SerializeAndReconstructTree {
 		return ans;
 	}
 
+	// 按层方式反序列化
 	public static Node buildByLevelQueue(Queue<String> levelList) {
 		if (levelList == null || levelList.size() == 0) {
 			return null;
