@@ -16,8 +16,8 @@ public class Code05_UnionFind {
 
 	public static class UnionFind<V> {
 		public HashMap<V, Node<V>> nodes;
-		public HashMap<Node<V>, Node<V>> parents;
-		public HashMap<Node<V>, Integer> sizeMap;
+		public HashMap<Node<V>, Node<V>> parents; // 当前节点的父节点，key是子节点，value是直系父节点
+		public HashMap<Node<V>, Integer> sizeMap; // 代表节点 下的节点个数，用于别的用途，例如统计当前集合的个数，size的个数=集合的个数
 
 		public UnionFind(List<V> values) {
 			nodes = new HashMap<>();
@@ -31,34 +31,36 @@ public class Code05_UnionFind {
 			}
 		}
 
-		// 给你一个节点，请你往上到不能再往上，把代表返回
+		// 给你一个节点，请你往上到不能再往上，把代表节点返回
 		public Node<V> findFather(Node<V> cur) {
 			Stack<Node<V>> path = new Stack<>();
 			while (cur != parents.get(cur)) {
 				path.push(cur);
 				cur = parents.get(cur);
 			}
-			while (!path.isEmpty()) {
+			while (!path.isEmpty()) { // 优化2：代表节点下的同一个路径下的节点，优化为扁平结构，这样以后这条链上的节点再查找代表节点时，不需要遍历整个链了
 				parents.put(path.pop(), cur);
 			}
 			return cur;
 		}
 
+		// 代表节点是否相同
 		public boolean isSameSet(V a, V b) {
 			return findFather(nodes.get(a)) == findFather(nodes.get(b));
 		}
 
+		// 把a所在的集合  union b所在的集合
 		public void union(V a, V b) {
-			Node<V> aHead = findFather(nodes.get(a));
+			Node<V> aHead = findFather(nodes.get(a)); // 找到代表节点
 			Node<V> bHead = findFather(nodes.get(b));
-			if (aHead != bHead) {
-				int aSetSize = sizeMap.get(aHead);
+			if (aHead != bHead) { // 不是同一个集合
+				int aSetSize = sizeMap.get(aHead); // 找到代表节点下的节点个数
 				int bSetSize = sizeMap.get(bHead);
-				Node<V> big = aSetSize >= bSetSize ? aHead : bHead;
-				Node<V> small = big == aHead ? bHead : aHead;
+				Node<V> big = aSetSize >= bSetSize ? aHead : bHead; // 哪个代表节点下的节点个数多，谁就是大集合
+				Node<V> small = big == aHead ? bHead : aHead; // == 判断是否为同一个节点
 				parents.put(small, big);
-				sizeMap.put(big, aSetSize + bSetSize);
-				sizeMap.remove(small);
+				sizeMap.put(big, aSetSize + bSetSize); // 小集合 挂在 大集合下面
+				sizeMap.remove(small); // 小集合变成非代表节点
 			}
 		}
 
