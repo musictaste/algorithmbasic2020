@@ -3,6 +3,7 @@ package class14;
 import java.util.Arrays;
 import java.util.Comparator;
 
+// 用贪心算法返回最多会议室宣讲场次
 public class Code03_BestArrange {
 
 	public static class Program {
@@ -15,7 +16,7 @@ public class Code03_BestArrange {
 		}
 	}
 
-	// 暴力！所有情况都尝试！
+	// 解题二：暴力！所有情况都尝试！
 	public static int bestArrange1(Program[] programs) {
 		if (programs == null || programs.length == 0) {
 			return 0;
@@ -56,14 +57,15 @@ public class Code03_BestArrange {
 		return ans;
 	}
 
+	// 解题一：贪心算法
 	// 会议的开始时间和结束时间，都是数值，不会 < 0
 	public static int bestArrange2(Program[] programs) {
-		Arrays.sort(programs, new ProgramComparator());
-		int timeLine = 0;
-		int result = 0;
+		Arrays.sort(programs, new ProgramComparator()); // 结束时间谁早谁排前面
+		int timeLine = 0; // 当前时间
+		int result = 0; // 安排的会议个数
 		// 依次遍历每一个会议，结束时间早的会议先遍历
 		for (int i = 0; i < programs.length; i++) {
-			if (timeLine <= programs[i].start) {
+			if (timeLine <= programs[i].start) { // 会议的开始时间晚于当前时间，那么该会议可以被安排
 				result++;
 				timeLine = programs[i].end;
 			}
@@ -72,12 +74,10 @@ public class Code03_BestArrange {
 	}
 
 	public static class ProgramComparator implements Comparator<Program> {
-
 		@Override
 		public int compare(Program o1, Program o2) {
 			return o1.end - o2.end;
 		}
-
 	}
 
 	// for test

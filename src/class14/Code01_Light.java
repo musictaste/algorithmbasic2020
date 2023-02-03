@@ -37,21 +37,22 @@ public class Code01_Light {
 		}
 	}
 
+	// 时间复杂度O(N)，顺序遍历一遍数组
 	public static int minLight2(String road) {
 		char[] str = road.toCharArray();
 		int i = 0;
 		int light = 0;
 		while (i < str.length) {
-			if (str[i] == 'X') {
+			if (str[i] == 'X') { // i位置为墙，直接下一个节点
 				i++;
 			} else {
 				light++;
 				if (i + 1 == str.length) {
 					break;
 				} else { // 有i位置 i+ 1 X .
-					if (str[i + 1] == 'X') {
+					if (str[i + 1] == 'X') { // i+1位置为墙，i位置放灯，跳i+2位置
 						i = i + 2;
-					} else {
+					} else { // i+1位置为街道，不管i+2位置是墙还是街道，i+1位置放灯，跳i+3位置
 						i = i + 3;
 					}
 				}

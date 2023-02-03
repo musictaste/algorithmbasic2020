@@ -2,6 +2,7 @@ package class14;
 
 import java.util.PriorityQueue;
 
+// 用贪心算法解决输入一个数组返回金条分割的最小代价
 public class Code02_LessMoneySplitGold {
 
 	// 纯暴力！
@@ -39,12 +40,13 @@ public class Code02_LessMoneySplitGold {
 		return ans;
 	}
 
+	// 用贪心算法解决输入一个数组返回金条分割的最小代价
 	public static int lessMoney2(int[] arr) {
-		PriorityQueue<Integer> pQ = new PriorityQueue<>();
+		PriorityQueue<Integer> pQ = new PriorityQueue<>(); // 默认小根堆
 		for (int i = 0; i < arr.length; i++) {
 			pQ.add(arr[i]);
 		}
-		int sum = 0;
+		int sum = 0; // 总代价
 		int cur = 0;
 		while (pQ.size() > 1) {
 			cur = pQ.poll() + pQ.poll();
