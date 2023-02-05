@@ -15,6 +15,7 @@ public class Code05_UnionFind {
 	}
 
 	public static class UnionFind<V> {
+		// 需要注意哈希表虽然时间复杂度O(1),但是是大常数
 		public HashMap<V, Node<V>> nodes;
 		public HashMap<Node<V>, Node<V>> parents; // 当前节点的父节点，key是子节点，value是直系父节点
 		public HashMap<Node<V>, Integer> sizeMap; // 代表节点 下的节点个数，用于别的用途，例如统计当前集合的个数，size的个数=集合的个数

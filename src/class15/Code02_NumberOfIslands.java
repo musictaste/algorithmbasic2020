@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+// 岛问题
 // 本题为leetcode原题
 // 测试链接：https://leetcode.com/problems/number-of-islands/
 // 所有方法都可以直接通过
 public class Code02_NumberOfIslands {
 
+	// 宽M，高N，时间复杂度O(M*N)
 	public static int numIslands3(char[][] board) {
 		int islands = 0;
 		for (int i = 0; i < board.length; i++) {
@@ -23,8 +25,9 @@ public class Code02_NumberOfIslands {
 		return islands;
 	}
 
-	// 从(i,j)这个位置出发，把所有练成一片的'1'字符，变成0
+	// 感染过程：从(i,j)这个位置出发，把所有练成一片的'1'字符，变成0
 	public static void infect(char[][] board, int i, int j) {
+		// 越界或当前位置不是1
 		if (i < 0 || i == board.length || j < 0 || j == board[0].length || board[i][j] != '1') {
 			return;
 		}
@@ -35,6 +38,9 @@ public class Code02_NumberOfIslands {
 		infect(board, i, j + 1);
 	}
 
+
+	// 并查集的方式
+	// 只查左上方向节点
 	public static int numIslands1(char[][] board) {
 		int row = board.length;
 		int col = board[0].length;
@@ -49,17 +55,23 @@ public class Code02_NumberOfIslands {
 			}
 		}
 		UnionFind1<Dot> uf = new UnionFind1<>(dotList);
+
+		// 使用三个for循环的好处，减少不必要的判断
+		// 第0行，没有上节点
 		for (int j = 1; j < col; j++) {
 			// (0,j)  (0,0)跳过了  (0,1) (0,2) (0,3)
 			if (board[0][j - 1] == '1' && board[0][j] == '1') {
 				uf.union(dots[0][j - 1], dots[0][j]);
 			}
 		}
+		// 第0列，没有左节点
 		for (int i = 1; i < row; i++) {
 			if (board[i - 1][0] == '1' && board[i][0] == '1') {
 				uf.union(dots[i - 1][0], dots[i][0]);
 			}
 		}
+
+		// 既有左节点、又有上节点
 		for (int i = 1; i < row; i++) {
 			for (int j = 1; j < col; j++) {
 				if (board[i][j] == '1') {
@@ -75,6 +87,7 @@ public class Code02_NumberOfIslands {
 		return uf.sets();
 	}
 
+	// 作用：使用它的内存地址
 	public static class Dot {
 
 	}
@@ -138,6 +151,8 @@ public class Code02_NumberOfIslands {
 
 	}
 
+	// 并查集的第二种使用方式
+	// 将二维数组转成一维数组，i,j= i*列数+j
 	public static int numIslands2(char[][] board) {
 		int row = board.length;
 		int col = board[0].length;

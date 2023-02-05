@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 
+// 迪瑞克斯拉算法
 // no negative weight
 public class Code06_Dijkstra {
 
+	// 傻白甜方法
 	public static HashMap<Node, Integer> dijkstra1(Node from) {
 		HashMap<Node, Integer> distanceMap = new HashMap<>();
 		distanceMap.put(from, 0);
@@ -30,6 +32,7 @@ public class Code06_Dijkstra {
 		return distanceMap;
 	}
 
+	// 为什么说第一种方案不好，就是这个方法不好，如何优化？加强堆
 	public static Node getMinDistanceAndUnselectedNode(HashMap<Node, Integer> distanceMap, HashSet<Node> touchedNodes) {
 		Node minNode = null;
 		int minDistance = Integer.MAX_VALUE;

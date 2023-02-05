@@ -3,12 +3,13 @@ package class15;
 // 本题为leetcode原题
 // 测试链接：https://leetcode.com/problems/friend-circles/
 // 可以直接通过
-public class Code01_FriendCircles {
+public class  Code01_FriendCircles {
 
 	public static int findCircleNum(int[][] M) {
 		int N = M.length;
 		// {0} {1} {2} {N-1}
 		UnionFind unionFind = new UnionFind(N);
+		// 只遍历右上半区
 		for (int i = 0; i < N; i++) {
 			for (int j = i + 1; j < N; j++) {
 				if (M[i][j] == 1) { // i和j互相认识
@@ -19,13 +20,14 @@ public class Code01_FriendCircles {
 		return unionFind.sets();
 	}
 
+	// 哈希表的时间复杂度的常数项比较大，这次用数组来实现
 	public static class UnionFind {
 		// parent[i] = k ： i的父亲是k
 		private int[] parent;
 		// size[i] = k ： 如果i是代表节点，size[i]才有意义，否则无意义
 		// i所在的集合大小是多少
 		private int[] size;
-		// 辅助结构
+		// 辅助结构，数组寻址和压栈比栈快，所以用数组替代栈
 		private int[] help;
 		// 一共有多少个集合
 		private int sets;
@@ -41,7 +43,7 @@ public class Code01_FriendCircles {
 			}
 		}
 
-		// 从i开始一直往上，往上到不能再往上，代表节点，返回
+		// 从i开始一直往上，往上到不能再往上，得到代表节点，并返回
 		// 这个过程要做路径压缩
 		private int find(int i) {
 			int hi = 0;

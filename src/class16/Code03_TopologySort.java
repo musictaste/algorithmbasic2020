@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+// 图的拓扑排序算法
 public class Code03_TopologySort {
 
 	// directed graph and no loop
@@ -24,6 +25,7 @@ public class Code03_TopologySort {
 		while (!zeroInQueue.isEmpty()) {
 			Node cur = zeroInQueue.poll();
 			result.add(cur);
+			// 入度为0的节点，放入结果集后，要消除它影响的相邻节点的入度信息
 			for (Node next : cur.nexts) {
 				inMap.put(next, inMap.get(next) - 1);
 				if (inMap.get(next) == 0) {
