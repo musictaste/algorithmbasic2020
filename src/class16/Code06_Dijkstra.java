@@ -48,8 +48,8 @@ public class Code06_Dijkstra {
 	}
 
 	public static class NodeRecord {
-		public Node node;
-		public int distance;
+		public Node node; // 当前节点
+		public int distance; // 当前节点的距离
 
 		public NodeRecord(Node node, int distance) {
 			this.node = node;
@@ -79,22 +79,26 @@ public class Code06_Dijkstra {
 		// 有一个点叫node，现在发现了一个从源节点出发到达node的距离为distance
 		// 判断要不要更新，如果需要的话，就更新
 		public void addOrUpdateOrIgnore(Node node, int distance) {
+			// 在堆上
 			if (inHeap(node)) {
 				distanceMap.put(node, Math.min(distanceMap.get(node), distance));
-				insertHeapify(heapIndexMap.get(node));
+				insertHeapify(heapIndexMap.get(node)); // 距离只会表小，所以向上调整
 			}
+			// 没有进来过，就是新增节点操作
 			if (!isEntered(node)) {
 				nodes[size] = node;
 				heapIndexMap.put(node, size);
 				distanceMap.put(node, distance);
 				insertHeapify(size++);
 			}
+			// ignore
 		}
 
+		// 弹出节点
 		public NodeRecord pop() {
 			NodeRecord nodeRecord = new NodeRecord(nodes[0], distanceMap.get(nodes[0]));
 			swap(0, size - 1);
-			heapIndexMap.put(nodes[size - 1], -1);
+			heapIndexMap.put(nodes[size - 1], -1); // 堆中的该节点标记为-1，代表不在堆上
 			distanceMap.remove(nodes[size - 1]);
 			// free C++同学还要把原本堆顶节点析构，对java同学不必
 			nodes[size - 1] = null;
@@ -125,10 +129,12 @@ public class Code06_Dijkstra {
 			}
 		}
 
+		// 是否进入过
 		private boolean isEntered(Node node) {
 			return heapIndexMap.containsKey(node);
 		}
 
+		// 是否在堆上；如果值为-1，说明曾经进来过但是又出去了
 		private boolean inHeap(Node node) {
 			return isEntered(node) && heapIndexMap.get(node) != -1;
 		}

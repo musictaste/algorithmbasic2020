@@ -2,8 +2,10 @@ package class17;
 
 import java.util.Stack;
 
+// 打印n层汉诺塔从最左边移动到最右边的全部过程
 public class Code02_Hanoi {
 
+	// 解法一：暴力递归
 	public static void hanoi1(int n) {
 		leftToRight(n);
 	}
@@ -70,12 +72,16 @@ public class Code02_Hanoi {
 		midToLeft(n - 1);
 	}
 
+	// 暴力递归的优化
 	public static void hanoi2(int n) {
 		if (n > 0) {
 			func(n, "left", "right", "mid");
 		}
 	}
 
+	// 1~N 在：from
+	//     去：to
+	//	   另一个：other
 	public static void func(int N, String from, String to, String other) {
 		if (N == 1) { // base
 			System.out.println("Move 1 from " + from + " to " + to);
@@ -102,6 +108,7 @@ public class Code02_Hanoi {
 		}
 	}
 
+	// 非递归版本，课上跳过
 	public static void hanoi3(int N) {
 		if (N < 1) {
 			return;
