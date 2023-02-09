@@ -14,8 +14,10 @@ public class Code01_Knapsack {
 		return process(w, v, 0, bag);
 	}
 
-	// index 0~N
-	// rest 负~bag
+
+	// 当前考虑到了index号货物，index后的所有货物都可以自由选择
+	// 做的选择不能超过背包容量
+	// 返回最大价值
 	public static int process(int[] w, int[] v, int index, int rest) {
 		if (rest < 0) {
 			return -1;
@@ -23,7 +25,11 @@ public class Code01_Knapsack {
 		if (index == w.length) {
 			return 0;
 		}
+		// 有货，考虑index位置的货
+		// 背包有容量，哪怕是0
+		// 不考虑index位置的货
 		int p1 = process(w, v, index + 1, rest);
+		// 考虑index位置的货
 		int p2 = 0;
 		int next = process(w, v, index + 1, rest - w[index]);
 		if (next != -1) {
@@ -37,6 +43,8 @@ public class Code01_Knapsack {
 			return 0;
 		}
 		int N = w.length;
+		// 可变参数的变化范围：index 0~N
+		// 可变参数的变化范围：rest 负~bag
 		int[][] dp = new int[N + 1][bag + 1];
 		for (int index = N - 1; index >= 0; index--) {
 			for (int rest = 0; rest <= bag; rest++) {

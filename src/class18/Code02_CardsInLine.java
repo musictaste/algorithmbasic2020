@@ -1,5 +1,6 @@
 package class18;
 
+
 public class Code02_CardsInLine {
 
 	// 根据规则，返回获胜者的分数
@@ -22,16 +23,17 @@ public class Code02_CardsInLine {
 		return Math.max(p1, p2);
 	}
 
-	// // arr[L..R]，后手获得的最好分数返回
+	// arr[L..R]，后手获得的最好分数返回
 	public static int g1(int[] arr, int L, int R) {
 		if (L == R) {
 			return 0;
 		}
 		int p1 = f1(arr, L + 1, R); // 对手拿走了L位置的数
 		int p2 = f1(arr, L, R - 1); // 对手拿走了R位置的数
-		return Math.min(p1, p2);
+		return Math.min(p1, p2); // 很绕，但是要看win1方法中的方法调用
 	}
 
+	// 方法二：傻缓存法
 	public static int win2(int[] arr) {
 		if (arr == null || arr.length == 0) {
 			return 0;
@@ -67,7 +69,7 @@ public class Code02_CardsInLine {
 		return ans;
 	}
 
-	// // arr[L..R]，后手获得的最好分数返回
+	// arr[L..R]，后手获得的最好分数返回
 	public static int g2(int[] arr, int L, int R, int[][] fmap, int[][] gmap) {
 		if (gmap[L][R] != -1) {
 			return gmap[L][R];
@@ -82,6 +84,7 @@ public class Code02_CardsInLine {
 		return ans;
 	}
 
+	// 动态规划
 	public static int win3(int[] arr) {
 		if (arr == null || arr.length == 0) {
 			return 0;
@@ -90,7 +93,7 @@ public class Code02_CardsInLine {
 		int[][] fmap = new int[N][N];
 		int[][] gmap = new int[N][N];
 		for (int i = 0; i < N; i++) {
-			fmap[i][i] = arr[i];
+			fmap[i][i] = arr[i]; // f 对角线
 		}
 		for (int startCol = 1; startCol < N; startCol++) {
 			int L = 0;
