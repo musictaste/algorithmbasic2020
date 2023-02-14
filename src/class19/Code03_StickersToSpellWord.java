@@ -11,8 +11,8 @@ public class Code03_StickersToSpellWord {
 	}
 
 	// 所有贴纸stickers，每一种贴纸都有无穷张
-	// target
-	// 最少张数
+	// 目标：target
+	// 返回：最少张数
 	public static int process1(String[] stickers, String target) {
 		if (target.length() == 0) {
 			return 0;
@@ -101,6 +101,7 @@ public class Code03_StickersToSpellWord {
 		return min + (min == Integer.MAX_VALUE ? 0 : 1);
 	}
 
+	// 方法三：傻缓存
 	public static int minStickers3(String[] stickers, String target) {
 		int N = stickers.length;
 		int[][] counts = new int[N][26];

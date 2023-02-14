@@ -1,8 +1,10 @@
 package class20;
 
+// 返回最长回文子序列长度
 // 测试链接：https://leetcode.com/problems/longest-palindromic-subsequence/
 public class Code01_PalindromeSubsequence {
 
+	// 方法一：范围尝试模型，特别强调开头怎么样，结尾怎么样
 	public static int lpsl1(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
@@ -13,26 +15,27 @@ public class Code01_PalindromeSubsequence {
 
 	// str[L..R]最长回文子序列长度返回
 	public static int f(char[] str, int L, int R) {
-		if (L == R) {
+		if (L == R) { // 一个位置
 			return 1;
 		}
-		if (L == R - 1) {
+		if (L == R - 1) { // 两个位置
 			return str[L] == str[R] ? 2 : 1;
 		}
-		int p1 = f(str, L + 1, R - 1);
-		int p2 = f(str, L, R - 1);
-		int p3 = f(str, L + 1, R);
-		int p4 = str[L] != str[R] ? 0 : (2 + f(str, L + 1, R - 1));
+		int p1 = f(str, L + 1, R - 1); // 既不以L开头，也不以R结尾
+		int p2 = f(str, L, R - 1); // 以L开头，不以R结尾
+		int p3 = f(str, L + 1, R); // 不以L开头，以R结尾
+		int p4 = str[L] != str[R] ? 0 : (2 + f(str, L + 1, R - 1)); // 以L开头，以R结尾
 		return Math.max(Math.max(p1, p2), Math.max(p3, p4));
 	}
 
+	// 方法二：傻缓存法
 	public static int lpsl2(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
 		}
 		char[] str = s.toCharArray();
 		int N = str.length;
-		int[][] dp = new int[N][N];
+		int[][] dp = new int[N][N]; // 可变参数的范围，L和R
 		dp[N - 1][N - 1] = 1;
 		for (int i = 0; i < N - 1; i++) {
 			dp[i][i] = 1;

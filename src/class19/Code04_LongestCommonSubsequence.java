@@ -1,5 +1,6 @@
 package class19;
 
+// 返回最长公共的子序列和个数
 // 这个问题leetcode上可以直接测
 // 链接：https://leetcode.com/problems/longest-common-subsequence/
 public class Code04_LongestCommonSubsequence {
@@ -14,6 +15,7 @@ public class Code04_LongestCommonSubsequence {
 		return process1(str1, str2, str1.length - 1, str2.length - 1);
 	}
 
+	// 样本对应模型，特别强调结尾如何如何
 	// str1[0...i]和str2[0...j]，这个范围上最长公共子序列长度是多少？
 	// 可能性分类:
 	// a) 最长公共子序列，一定不以str1[i]字符结尾、也一定不以str2[j]字符结尾
