@@ -1,17 +1,19 @@
 package class20;
 
+// 返回象棋从一个位置到另一个位置的方法有多少种
 public class Code02_HorseJump {
 
 	// 当前来到的位置是（x,y）
 	// 还剩下rest步需要跳
 	// 跳完rest步，正好跳到a，b的方法数是多少？
-	// 10 * 9
+	// 10(行) * 9(列)大的棋盘
+	// 方法一：暴力尝试
 	public static int jump(int a, int b, int k) {
 		return process(0, 0, k, a, b);
 	}
 
 	public static int process(int x, int y, int rest, int a, int b) {
-		if (x < 0 || x > 9 || y < 0 || y > 8) {
+		if (x < 0 || x > 9 || y < 0 || y > 8) { // 越界判断
 			return 0;
 		}
 		if (rest == 0) {
@@ -28,6 +30,7 @@ public class Code02_HorseJump {
 		return ways;
 	}
 
+	// 方法二：动态规划
 	public static int dp(int a, int b, int k) {
 		int[][][] dp = new int[10][9][k + 1];
 		dp[a][b][0] = 1;

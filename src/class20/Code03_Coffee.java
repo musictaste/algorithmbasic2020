@@ -96,6 +96,7 @@ public class Code03_Coffee {
 	// drinks 所有杯子可以开始洗的时间
 	// wash 单杯洗干净的时间（串行）
 	// air 挥发干净的时间(并行)
+	// index 当前来到哪个小人的位置
 	// free 洗的机器什么时候可用
 	// drinks[index.....]都变干净，最早的结束时间（返回）
 	public static int bestTime(int[] drinks, int wash, int air, int index, int free) {
