@@ -1,7 +1,10 @@
 package class21;
 
+// 返回组成aim的方法数(arr是货币数组)
+// 对应的模型：从左往右尝试的模型
 public class Code02_CoinsWayEveryPaperDifferent {
 
+	// 方法一：暴力递归
 	public static int coinWays(int[] arr, int aim) {
 		return process(arr, 0, aim);
 	}
@@ -14,19 +17,20 @@ public class Code02_CoinsWayEveryPaperDifferent {
 		if (index == arr.length) { // 没钱了！
 			return rest == 0 ? 1 : 0;
 		} else {
-			return process(arr, index + 1, rest) + process(arr, index + 1, rest - arr[index]);
+			return process(arr, index + 1, rest) + process(arr, index + 1, rest - arr[index]); //  不要index位置的钱 + 要index位置的钱
 		}
 	}
 
+	// 方法二：动态规划
 	public static int dp(int[] arr, int aim) {
 		if (aim == 0) {
 			return 1;
 		}
 		int N = arr.length;
-		int[][] dp = new int[N + 1][aim + 1];
+		int[][] dp = new int[N + 1][aim + 1]; // 可变参数
 		dp[N][0] = 1;
-		for (int index = N - 1; index >= 0; index--) {
-			for (int rest = 0; rest <= aim; rest++) {
+		for (int index = N - 1; index >= 0; index--) { // 从下往上遍历
+			for (int rest = 0; rest <= aim; rest++) { // 从左往右遍历
 				dp[index][rest] = dp[index + 1][rest] + (rest - arr[index] >= 0 ? dp[index + 1][rest - arr[index]] : 0);
 			}
 		}

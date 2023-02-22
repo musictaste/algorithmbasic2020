@@ -1,7 +1,9 @@
 package class21;
 
+// 返回组成aim的方法数(arr是面值数组)
+// 该题使用从左往右的尝试模型
 public class Code03_CoinsWayNoLimit {
-
+	// 方法一：暴力尝试
 	public static int coinsWay(int[] arr, int aim) {
 		if (arr == null || arr.length == 0 || aim < 0) {
 			return 0;
@@ -15,12 +17,13 @@ public class Code03_CoinsWayNoLimit {
 			return rest == 0 ? 1 : 0;
 		}
 		int ways = 0;
-		for (int zhang = 0; zhang * arr[index] <= rest; zhang++) {
+		for (int zhang = 0; zhang * arr[index] <= rest; zhang++) { // 当前面值的钱，用0张、1张。。。
 			ways += process(arr, index + 1, rest - (zhang * arr[index]));
 		}
 		return ways;
 	}
 
+	// 记忆化搜索
 	public static int dp1(int[] arr, int aim) {
 		if (arr == null || arr.length == 0 || aim < 0) {
 			return 0;
@@ -31,7 +34,7 @@ public class Code03_CoinsWayNoLimit {
 		for (int index = N - 1; index >= 0; index--) {
 			for (int rest = 0; rest <= aim; rest++) {
 				int ways = 0;
-				for (int zhang = 0; zhang * arr[index] <= rest; zhang++) {
+				for (int zhang = 0; zhang * arr[index] <= rest; zhang++) { //改出来的dp方法，又多了一个for循环
 					ways += dp[index + 1][rest - (zhang * arr[index])];
 				}
 				dp[index][rest] = ways;
@@ -40,6 +43,7 @@ public class Code03_CoinsWayNoLimit {
 		return dp[0][aim];
 	}
 
+	// 进一步优化：严格的表结构
 	public static int dp2(int[] arr, int aim) {
 		if (arr == null || arr.length == 0 || aim < 0) {
 			return 0;
