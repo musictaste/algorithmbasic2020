@@ -1,5 +1,7 @@
 package class22;
 
+// 返回组成aim的最少货币数
+// 从左往右的尝试模型
 public class Code02_MinCoinsNoLimit {
 
 	public static int minCoins(int[] arr, int aim) {
@@ -9,7 +11,9 @@ public class Code02_MinCoinsNoLimit {
 	// arr[index...]面值，每种面值张数自由选择，
 	// 搞出rest正好这么多钱，返回最小张数
 	// 拿Integer.MAX_VALUE标记怎么都搞定不了
+	// 注意如果怎么都搞不定用-1来标记，去看课堂的代码，这里暂不补充
 	public static int process(int[] arr, int index, int rest) {
+		// 没有钱了
 		if (index == arr.length) {
 			return rest == 0 ? 0 : Integer.MAX_VALUE;
 		} else {
@@ -17,6 +21,7 @@ public class Code02_MinCoinsNoLimit {
 			for (int zhang = 0; zhang * arr[index] <= rest; zhang++) {
 				int next = process(arr, index + 1, rest - zhang * arr[index]);
 				if (next != Integer.MAX_VALUE) {
+					// next不是最大值，说明是有效的
 					ans = Math.min(ans, zhang + next);
 				}
 			}
@@ -24,6 +29,7 @@ public class Code02_MinCoinsNoLimit {
 		}
 	}
 
+	// 有枚举行为的动态规划，记忆化搜索
 	public static int dp1(int[] arr, int aim) {
 		if (aim == 0) {
 			return 0;
@@ -34,6 +40,7 @@ public class Code02_MinCoinsNoLimit {
 		for (int j = 1; j <= aim; j++) {
 			dp[N][j] = Integer.MAX_VALUE;
 		}
+		// 因为index依赖index+1的位置，所以index倒序
 		for (int index = N - 1; index >= 0; index--) {
 			for (int rest = 0; rest <= aim; rest++) {
 				int ans = Integer.MAX_VALUE;
@@ -49,6 +56,7 @@ public class Code02_MinCoinsNoLimit {
 		return dp[0][aim];
 	}
 
+	// 去除枚举行为，严格表结构
 	public static int dp2(int[] arr, int aim) {
 		if (aim == 0) {
 			return 0;

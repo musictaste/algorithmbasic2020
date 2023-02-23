@@ -1,11 +1,14 @@
 package class22;
 
+// 返回K次打击后英雄把怪兽砍死的几率
+// 样本对应模型
 public class Code01_KillMonster {
 
 	public static double right(int N, int M, int K) {
 		if (N < 1 || M < 1 || K < 1) {
 			return 0;
 		}
+		// 总的情况数=（M+1）^K
 		long all = (long) Math.pow(M + 1, K);
 		long kill = process(K, M, N);
 		return (double) ((double) kill / (double) all);
@@ -29,6 +32,7 @@ public class Code01_KillMonster {
 		return ways;
 	}
 
+	// 记忆化搜索
 	public static double dp1(int N, int M, int K) {
 		if (N < 1 || M < 1 || K < 1) {
 			return 0;
@@ -37,6 +41,7 @@ public class Code01_KillMonster {
 		long[][] dp = new long[K + 1][N + 1];
 		dp[0][0] = 1;
 		for (int times = 1; times <= K; times++) {
+			// 0血量的情况，第一列
 			dp[times][0] = (long) Math.pow(M + 1, times);
 			for (int hp = 1; hp <= N; hp++) {
 				long ways = 0;
@@ -54,6 +59,7 @@ public class Code01_KillMonster {
 		return (double) ((double) kill / (double) all);
 	}
 
+	// 严格的表结构，去掉枚举行为
 	public static double dp2(int N, int M, int K) {
 		if (N < 1 || M < 1 || K < 1) {
 			return 0;
@@ -68,7 +74,7 @@ public class Code01_KillMonster {
 				if (hp - 1 - M >= 0) {
 					dp[times][hp] -= dp[times - 1][hp - 1 - M];
 				} else {
-					dp[times][hp] -= Math.pow(M + 1, times - 1);
+					dp[times][hp] -= Math.pow(M + 1, times - 1); // 这块需要注意
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 package class22;
 
+// 返回裂开的数的种类
 public class Code03_SplitNumber {
 
 	// n为正数
@@ -21,7 +22,7 @@ public class Code03_SplitNumber {
 			return 1;
 		}
 		if (pre > rest) {
-			return 0;
+			return 0; // base case
 		}
 		int ways = 0;
 		for (int first = pre; first <= rest; first++) {
