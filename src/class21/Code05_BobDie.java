@@ -1,8 +1,11 @@
 package class21;
 
+// 返k步之后Bob还在NM的区域的概率
 public class Code05_BobDie {
 
+	// k:步数
 	public static double livePosibility1(int row, int col, int k, int N, int M) {
+		// 一共走的总数=4^k
 		return (double) process(row, col, k, N, M) / Math.pow(4, k);
 	}
 

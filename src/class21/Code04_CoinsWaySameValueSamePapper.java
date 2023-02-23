@@ -3,6 +3,8 @@ package class21;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+// 返回组成aim的方法数(arr是面值货币数组，值是正数)
+// 从左往右的尝试模型
 public class Code04_CoinsWaySameValueSamePapper {
 
 	public static class Info {
@@ -16,6 +18,7 @@ public class Code04_CoinsWaySameValueSamePapper {
 	}
 
 	public static Info getInfo(int[] arr) {
+		// 面值，出现的次数
 		HashMap<Integer, Integer> counts = new HashMap<>();
 		for (int value : arr) {
 			if (!counts.containsKey(value)) {

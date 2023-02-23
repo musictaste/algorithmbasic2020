@@ -1,5 +1,10 @@
 package class23;
 
+// 给定数组分成两个集合,
+// 数组长度为偶数时,集合包含个数一样;
+// 数组长度为奇数时,集合包含个数必须只差一个;
+// 返回最接近的情况下较小的集合的累加和
+// (字节原题)
 public class Code02_SplitSumClosedSizeHalf {
 
 	public static int right(int[] arr) {

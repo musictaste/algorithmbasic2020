@@ -1,5 +1,7 @@
 package class23;
 
+// 给定数组分成两个集合要累加和接近返回最接近的情况下较小的集合的累加和
+// 类似背包问题-代码：Code01_Knapsack
 public class Code01_SplitSumClosed {
 
 	public static int right(int[] arr) {
@@ -11,6 +13,8 @@ public class Code01_SplitSumClosed {
 			sum += num;
 		}
 		return process(arr, 0, sum / 2);
+		// sum >> 1  负数的情况也可以正确的值，除了-1, -1右移1位，结果是0
+		// sum >>> 1 负数的情况得不到正确的值
 	}
 
 	// arr[i...]可以自由选择，请返回累加和尽量接近rest，但不能超过rest的情况下，最接近的累加和是多少？
@@ -46,7 +50,7 @@ public class Code01_SplitSumClosed {
 				int p1 = dp[i + 1][rest];
 				// 可能性2，要使用arr[i]
 				int p2 = 0;
-				if (arr[i] <= rest) {
+				if (arr[i] <= rest) { // 上游已经做了条件处理
 					p2 = arr[i] + dp[i + 1][rest - arr[i]];
 				}
 				dp[i][rest] = Math.max(p1, p2);
