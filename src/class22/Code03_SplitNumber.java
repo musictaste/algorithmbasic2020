@@ -31,6 +31,7 @@ public class Code03_SplitNumber {
 		return ways;
 	}
 
+	// 有枚举行为的动态规划，记忆化搜索
 	public static int dp1(int n) {
 		if (n < 0) {
 			return 0;
@@ -39,12 +40,13 @@ public class Code03_SplitNumber {
 			return 1;
 		}
 		int[][] dp = new int[n + 1][n + 1];
+		// 上一个拆出来的数是pre
 		for (int pre = 1; pre <= n; pre++) {
-			dp[pre][0] = 1;
+			dp[pre][0] = 1; // rest=0的时候返回1
 			dp[pre][pre] = 1;
 		}
 		for (int pre = n - 1; pre >= 1; pre--) {
-			for (int rest = pre + 1; rest <= n; rest++) {
+			for (int rest = pre + 1; rest <= n; rest++) { // 剩余的rest必须大于上一个数pre
 				int ways = 0;
 				for (int first = pre; first <= rest; first++) {
 					ways += dp[first][rest - first];
@@ -55,6 +57,7 @@ public class Code03_SplitNumber {
 		return dp[1][n];
 	}
 
+	// 去除枚举行为，严格表结构
 	public static int dp2(int n) {
 		if (n < 0) {
 			return 0;
