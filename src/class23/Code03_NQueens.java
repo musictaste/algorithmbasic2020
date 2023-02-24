@@ -1,5 +1,6 @@
 package class23;
 
+// N皇后问题
 public class Code03_NQueens {
 
 	public static int num1(int n) {

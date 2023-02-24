@@ -15,7 +15,7 @@ public class Code02_SplitSumClosedSizeHalf {
 		for (int num : arr) {
 			sum += num;
 		}
-		if ((arr.length & 1) == 0) {
+		if ((arr.length & 1) == 0) { // 偶数
 			return process(arr, 0, arr.length / 2, sum / 2);
 		} else {
 			return Math.max(process(arr, 0, arr.length / 2, sum / 2), process(arr, 0, arr.length / 2 + 1, sum / 2));
@@ -60,6 +60,7 @@ public class Code02_SplitSumClosedSizeHalf {
 				}
 			}
 		}
+		// if (i == arr.length) { return picks == 0 ? 0 : -1;}
 		for (int rest = 0; rest <= sum; rest++) {
 			dp[N][0][rest] = 0;
 		}
