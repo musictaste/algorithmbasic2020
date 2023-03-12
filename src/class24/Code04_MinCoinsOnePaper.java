@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.LinkedList;
 
+// 组成aim的最小货币数
 public class Code04_MinCoinsOnePaper {
 
 	public static int minCoins(int[] arr, int aim) {

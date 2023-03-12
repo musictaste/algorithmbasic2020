@@ -2,9 +2,10 @@ package class24;
 
 import java.util.LinkedList;
 
+// arr中达标子数组的数量
 public class Code02_AllLessNumSubArray {
 
-	// 暴力的对数器方法
+	// 暴力的对数器方法,时间复杂度
 	public static int right(int[] arr, int sum) {
 		if (arr == null || arr.length == 0 || sum < 0) {
 			return 0;
@@ -27,6 +28,8 @@ public class Code02_AllLessNumSubArray {
 		return count;
 	}
 
+	// 前提结论：L到R内的数组达标，那么L到R范围内的任意子数组都达标
+	// 如果L到R内的数组不达标，那么L往左和往右的任意范围数组都不达标
 	public static int num(int[] arr, int sum) {
 		if (arr == null || arr.length == 0 || sum < 0) {
 			return 0;
@@ -37,6 +40,7 @@ public class Code02_AllLessNumSubArray {
 		LinkedList<Integer> minWindow = new LinkedList<>();
 		int R = 0;
 		for (int L = 0; L < N; L++) {
+			// [L...R) 初次不达标，停
 			while (R < N) {
 				while (!maxWindow.isEmpty() && arr[maxWindow.peekLast()] <= arr[R]) {
 					maxWindow.pollLast();

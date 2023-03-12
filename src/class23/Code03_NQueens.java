@@ -1,6 +1,7 @@
 package class23;
 
 // N皇后问题
+// 时间复杂度O(n^n)
 public class Code03_NQueens {
 
 	public static int num1(int n) {
@@ -34,13 +35,14 @@ public class Code03_NQueens {
 	public static boolean isValid(int[] record, int i, int j) {
 		// 0..i-1
 		for (int k = 0; k < i; k++) {
-			if (j == record[k] || Math.abs(record[k] - j) == Math.abs(i - k)) {
+			if (j == record[k] || Math.abs(record[k] - j) == Math.abs(i - k)) { // 共列或共斜线
 				return false;
 			}
 		}
 		return true;
 	}
 
+	// 方法二：时间复杂度一样，但是优化了常数项
 	// 请不要超过32皇后问题
 	public static int num2(int n) {
 		if (n < 1 || n > 32) {

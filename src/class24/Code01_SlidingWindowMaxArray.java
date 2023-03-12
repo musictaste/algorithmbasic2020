@@ -2,6 +2,7 @@ package class24;
 
 import java.util.LinkedList;
 
+// 每一个滑出状态的最大值
 public class Code01_SlidingWindowMaxArray {
 
 	// 暴力的对数器方法
@@ -32,7 +33,7 @@ public class Code01_SlidingWindowMaxArray {
 			return null;
 		}
 		// qmax 窗口最大值的更新结构
-		// 放下标
+		// 双端队列里放下标，便于检查是否过期
 		LinkedList<Integer> qmax = new LinkedList<Integer>();
 		int[] res = new int[arr.length - w + 1];
 		int index = 0;
@@ -41,9 +42,11 @@ public class Code01_SlidingWindowMaxArray {
 				qmax.pollLast();
 			}
 			qmax.addLast(R);
+			// R-W是这个位置的数过期
 			if (qmax.peekFirst() == R - w) {
 				qmax.pollFirst();
 			}
+			// 是否形成一个正常的窗口，形成窗口则生成答案，否则不生成答案
 			if (R >= w - 1) {
 				res[index++] = arr[qmax.peekFirst()];
 			}
