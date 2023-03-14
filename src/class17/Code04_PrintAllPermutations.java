@@ -77,6 +77,7 @@ public class Code04_PrintAllPermutations {
 		if (index == str.length) {
 			ans.add(String.valueOf(str));
 		} else {
+			// 剪枝
 			boolean[] visited = new boolean[256];
 			for (int i = index; i < str.length; i++) {
 				if (!visited[str[i]]) {
