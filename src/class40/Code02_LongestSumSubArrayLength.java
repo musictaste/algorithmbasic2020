@@ -2,6 +2,8 @@ package class40;
 
 import java.util.HashMap;
 
+// 看到子数组，把流程定成什么？
+// 把流程定成：以每个位置结尾或开头的情况下，结果是什么？
 public class Code02_LongestSumSubArrayLength {
 
 	public static int maxLength(int[] arr, int k) {

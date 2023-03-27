@@ -21,7 +21,9 @@ public class Code03_LongestLessSumSubArrayLength {
 		}
 		// 迟迟扩不进来那一块儿的开头位置
 		int end = 0;
+		// 窗口累加和
 		int sum = 0;
+		// 最大长度，最终结果
 		int ans = 0;
 		for (int i = 0; i < arr.length; i++) {
 			// while循环结束之后：

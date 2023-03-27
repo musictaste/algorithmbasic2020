@@ -18,6 +18,7 @@ public class Code03_MSumToN {
 		return false;
 	}
 
+	// 提取最右侧的1
 	public static boolean isMSum2(int num) {
 //		
 //		return num == (num & (~num + 1));

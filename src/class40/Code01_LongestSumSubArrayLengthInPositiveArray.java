@@ -2,6 +2,7 @@ package class40;
 
 public class Code01_LongestSumSubArrayLengthInPositiveArray {
 
+	// 滑动窗口
 	public static int getMaxLength(int[] arr, int K) {
 		if (arr == null || arr.length == 0 || K <= 0) {
 			return 0;
