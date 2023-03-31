@@ -24,12 +24,14 @@ public class Code02_EvenTimesOddTimes {
 		// eor :     00110010110111000
 		// rightOne :00000000000001000
 		int rightOne = eor & (-eor); // 提取出最右的1
-		
+
+		// 整个数据，可以分为两类数：第三位置是1，不是1两种情况
 		
 		int onlyOne = 0; // eor'
 		for (int i = 0 ; i < arr.length;i++) {
 			//  arr[1] =  111100011110000
 			// rightOne=  000000000010000
+			// 第三位置是1的数，进行异或，就能得到其中一个数
 			if ((arr[i] & rightOne) != 0) {
 				onlyOne ^= arr[i];
 			}

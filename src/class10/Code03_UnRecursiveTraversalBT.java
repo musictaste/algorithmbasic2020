@@ -45,6 +45,7 @@ public class Code03_UnRecursiveTraversalBT {
 					stack.push(cur);
 					cur = cur.left;
 				} else {
+					// 弹出元素，来到右孩子，将右树的所有左孩子压入栈
 					cur = stack.pop();
 					System.out.print(cur.value + " ");
 					cur = cur.right;

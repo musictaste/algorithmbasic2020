@@ -8,6 +8,7 @@ import java.util.HashSet;
 // 返回这种数
 public class Code03_KM {
 
+	// 对数器：哈希表统计
 	public static int test(int[] arr, int k, int m) {
 		HashMap<Integer, Integer> map = new HashMap<>();
 		for (int num : arr) {
