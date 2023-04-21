@@ -21,6 +21,7 @@ public class Code01_SegmentTree {
 			for (int i = 1; i < MAXN; i++) {
 				arr[i] = origin[i - 1];
 			}
+			// MAXN << 2 也就是 MAXN * 4
 			sum = new int[MAXN << 2]; // 用来支持脑补概念中，某一个范围的累加和信息
 			lazy = new int[MAXN << 2]; // 用来支持脑补概念中，某一个范围沒有往下傳遞的纍加任務
 			change = new int[MAXN << 2]; // 用来支持脑补概念中，某一个范围有没有更新操作的任务
@@ -28,6 +29,10 @@ public class Code01_SegmentTree {
 		}
 
 		private void pushUp(int rt) {
+			// 堆(二叉树)父节点的值 = 左树+右树的累加和
+			// 父节点的位置是i，那么左节点的位置=（2*i）， 右节点的位置=（2*i+1）
+			// 如果左节点位置是i，那么父节点的位置=i/2
+			// 如果右节点位置是i，那么父节点的位置=i/2
 			sum[rt] = sum[rt << 1] + sum[rt << 1 | 1];
 		}
 
@@ -46,6 +51,7 @@ public class Code01_SegmentTree {
 				sum[rt << 1 | 1] = change[rt] * rn;
 				update[rt] = false;
 			}
+			// 懒信息下发一层，当前节点懒信息清空
 			if (lazy[rt] != 0) {
 				lazy[rt << 1] += lazy[rt];
 				sum[rt << 1] += lazy[rt] * ln;
@@ -59,12 +65,16 @@ public class Code01_SegmentTree {
 		// 在arr[l~r]范围上，去build，1~N，
 		// rt : 这个范围在sum中的下标
 		public void build(int l, int r, int rt) {
+			// 当前节点为叶节点，直接赋值
 			if (l == r) {
 				sum[rt] = arr[l];
 				return;
 			}
+			// 非叶节点，去build左孩子和右孩子
 			int mid = (l + r) >> 1;
+			// 左孩子范围：l~mid, 左孩子的下标=2*i
 			build(l, mid, rt << 1);
+			// 右孩子范围：mid~r, 右孩子的下标=2*i+1
 			build(mid + 1, r, rt << 1 | 1);
 			pushUp(rt);
 		}
@@ -95,7 +105,7 @@ public class Code01_SegmentTree {
 		// L~R, C 任务！
 		// rt，l~r
 		public void add(int L, int R, int C, int l, int r, int rt) {
-			// 任务如果把此时的范围全包了！
+			// 任务如果把此时的范围全包了！，懒更新
 			if (L <= l && r <= R) {
 				sum[rt] += C * (r - l + 1);
 				lazy[rt] += C;
@@ -104,7 +114,9 @@ public class Code01_SegmentTree {
 			// 任务没有把你全包！
 			// l  r  mid = (l+r)/2
 			int mid = (l + r) >> 1;
+			// 没有全包，把当前父节点的懒信息下发下一层
 			pushDown(rt, mid - l + 1, r - mid);
+			// 当前节点的懒信息已经清空并下发，开始搞新的任务：左孩子和右孩子执行任务
 			// L~R
 			if (L <= mid) {
 				add(L, R, C, l, mid, rt << 1);
@@ -186,6 +198,7 @@ public class Code01_SegmentTree {
 			SegmentTree seg = new SegmentTree(origin);
 			int S = 1;
 			int N = origin.length;
+			// 线段树，下标从1开始用，0位置弃而不用
 			int root = 1;
 			seg.build(S, N, root);
 			Right rig = new Right(origin);

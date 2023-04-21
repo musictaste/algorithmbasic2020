@@ -11,6 +11,7 @@ public class Code05_BobDie {
 
 	// 目前在row，col位置，还有rest步要走，走完了如果还在棋盘中就获得1个生存点，返回总的生存点数
 	public static long process(int row, int col, int rest, int N, int M) {
+		// 越界bob就死了，另外bob走出棋盘就走不回来了
 		if (row < 0 || row == N || col < 0 || col == M) {
 			return 0;
 		}

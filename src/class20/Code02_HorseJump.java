@@ -1,6 +1,7 @@
 package class20;
 
 // 返回象棋从一个位置到另一个位置的方法有多少种
+// 样本对应模型
 public class Code02_HorseJump {
 
 	// 当前来到的位置是（x,y）
@@ -30,9 +31,10 @@ public class Code02_HorseJump {
 		return ways;
 	}
 
-	// 方法二：动态规划
+	// 方法二：动态规划，严格位置依赖
 	public static int dp(int a, int b, int k) {
 		int[][][] dp = new int[10][9][k + 1];
+		// 生成rest=0，第0层的dp表
 		dp[a][b][0] = 1;
 		for (int rest = 1; rest <= k; rest++) {
 			for (int x = 0; x < 10; x++) {
@@ -52,6 +54,7 @@ public class Code02_HorseJump {
 		return dp[0][0][k];
 	}
 
+	// 小优化：为了防止从dp表中查询时，有越界情况，所以准备了一个pick方法，用于判断位置是否越界
 	public static int pick(int[][][] dp, int x, int y, int rest) {
 		if (x < 0 || x > 9 || y < 0 || y > 8) {
 			return 0;

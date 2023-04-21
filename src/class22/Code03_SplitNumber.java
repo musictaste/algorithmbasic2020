@@ -18,13 +18,17 @@ public class Code03_SplitNumber {
 	// 还剩rest需要去拆
 	// 返回拆解的方法数
 	public static int process(int pre, int rest) {
+		// 举例：6：拆成3+3
 		if (rest == 0) {
 			return 1;
 		}
+		// 上一步拆出来的数不能大于剩余的数
+		// 举例：6拆成4+2
 		if (pre > rest) {
 			return 0; // base case
 		}
 		int ways = 0;
+		// 举例6拆成2+2+2   2+4
 		for (int first = pre; first <= rest; first++) {
 			ways += process(first, rest - first);
 		}
@@ -42,6 +46,7 @@ public class Code03_SplitNumber {
 		int[][] dp = new int[n + 1][n + 1];
 		// 上一个拆出来的数是pre
 		for (int pre = 1; pre <= n; pre++) {
+			// 先填第一列和对角线的值
 			dp[pre][0] = 1; // rest=0的时候返回1
 			dp[pre][pre] = 1;
 		}

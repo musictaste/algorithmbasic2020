@@ -29,10 +29,12 @@ public class Code01_SplitSumClosed {
 			if (arr[i] <= rest) {
 				p2 = arr[i] + process(arr, i + 1, rest - arr[i]);
 			}
+			// 尽量接近rest，所以选最较大的
 			return Math.max(p1, p2);
 		}
 	}
 
+	// 严格表结构
 	public static int dp(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return 0;

@@ -3,6 +3,7 @@ package class19;
 // 返回最长公共的子序列和个数
 // 这个问题leetcode上可以直接测
 // 链接：https://leetcode.com/problems/longest-common-subsequence/
+// 范围尝试模型
 public class Code04_LongestCommonSubsequence {
 
 	public static int longestCommonSubsequence1(String s1, String s2) {
@@ -96,6 +97,7 @@ public class Code04_LongestCommonSubsequence {
 		}
 	}
 
+	// 动态规划，傻缓存法
 	public static int longestCommonSubsequence2(String s1, String s2) {
 		if (s1 == null || s2 == null || s1.length() == 0 || s2.length() == 0) {
 			return 0;

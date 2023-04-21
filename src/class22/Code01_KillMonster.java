@@ -42,14 +42,19 @@ public class Code01_KillMonster {
 		dp[0][0] = 1;
 		for (int times = 1; times <= K; times++) {
 			// 0血量的情况，第一列
+			// 怪兽血量为0，还有times刀可以砍，那么dp[times][0]的能将怪兽砍死的可能性就是(M+1)^times
 			dp[times][0] = (long) Math.pow(M + 1, times);
 			for (int hp = 1; hp <= N; hp++) {
 				long ways = 0;
 				for (int i = 0; i <= M; i++) {
+					// 为了防止越界，hp-i超过二维表的范围
+					// 在范围内，直接查dp表；如果血量已经小于0，直接查或者直接计算
 					if (hp - i >= 0) {
 						ways += dp[times - 1][hp - i];
 					} else {
-						ways += (long) Math.pow(M + 1, times - 1);
+						// 如果血量已经小于0，直接查或者直接计算
+//						ways += (long) Math.pow(M + 1, times - 1);
+						ways += dp[times-1][0];
 					}
 				}
 				dp[times][hp] = ways;

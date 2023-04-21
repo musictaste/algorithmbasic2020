@@ -81,6 +81,7 @@ public class Code04_CoinsWaySameValueSamePapper {
 		return dp[0][aim];
 	}
 
+	// 严格表结构
 	public static int dp2(int[] arr, int aim) {
 		if (arr == null || arr.length == 0 || aim < 0) {
 			return 0;
@@ -93,10 +94,15 @@ public class Code04_CoinsWaySameValueSamePapper {
 		dp[N][0] = 1;
 		for (int index = N - 1; index >= 0; index--) {
 			for (int rest = 0; rest <= aim; rest++) {
+				// a
 				dp[index][rest] = dp[index + 1][rest];
+				// 星号，星号的位置不越界
+				// dp[i][j]= a+星号
 				if (rest - coins[index] >= 0) {
 					dp[index][rest] += dp[index][rest - coins[index]];
 				}
+				// 甲，如果rest-极限张数还不越界，说明有甲
+				// dp[i][j]= a+星号-甲
 				if (rest - coins[index] * (zhangs[index] + 1) >= 0) {
 					dp[index][rest] -= dp[index + 1][rest - coins[index] * (zhangs[index] + 1)];
 				}

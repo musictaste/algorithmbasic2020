@@ -69,9 +69,11 @@ public class Code02_MinCoinsNoLimit {
 		}
 		for (int index = N - 1; index >= 0; index--) {
 			for (int rest = 0; rest <= aim; rest++) {
+				// 对号先赋值a，a是下方位置
 				dp[index][rest] = dp[index + 1][rest];
-				if (rest - arr[index] >= 0 
-						&& dp[index][rest - arr[index]] != Integer.MAX_VALUE) {
+				// 星号是 对号左边的情况，少使用一张当前货币的情况
+				// 星号位置不越界，并且星号位置dp表中有值
+				if (rest - arr[index] >= 0 && dp[index][rest - arr[index]] != Integer.MAX_VALUE) {
 					dp[index][rest] = Math.min(dp[index][rest], dp[index][rest - arr[index]] + 1);
 				}
 			}

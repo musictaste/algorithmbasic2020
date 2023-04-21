@@ -2,6 +2,7 @@ package class20;
 
 // 返回最长回文子序列长度
 // 测试链接：https://leetcode.com/problems/longest-palindromic-subsequence/
+// 样本对应模型
 public class Code01_PalindromeSubsequence {
 
 	// 方法一：范围尝试模型，特别强调开头怎么样，结尾怎么样

@@ -19,6 +19,7 @@ public class Code01_Knapsack {
 	// 做的选择不能超过背包容量
 	// 返回最大价值
 	public static int process(int[] w, int[] v, int index, int rest) {
+		// 注意rest 不等于0，为什么？有可能背包重量w=0，并且价值v为正数
 		if (rest < 0) {
 			return -1;
 		}
